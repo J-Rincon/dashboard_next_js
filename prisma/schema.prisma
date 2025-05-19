@@ -14,10 +14,58 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
 model User {
-  id    Int     @id @default(autoincrement())
-  email String  @unique
-  name  String?
-  role  String  @default("user")
+  id              String   @id @default(uuid())
+  name            String
+  email           String   @unique
+  username        String
+  passwordHash    String?
+  emailVerified   Boolean  @default(false)
+  isActive        Boolean  @default(false)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  roleId          String
+  role            Role     @relation(fields: [roleId], references: [id])
+  sessions        Session[]
+}
+
+model Session {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  expiresAt DateTime
+}
+
+model VerificationToken {
+  id        String   @id @default(uuid())
+  userId    String
+  token     String   @unique
+  expiresAt DateTime
+  user      User     @relation(fields: [userId], references: [id])
+}
+
+model ResendAttempt {
+  id        String   @id @default(uuid())
+  email     String
+  createdAt DateTime @default(now())
+  ip        String?
+
+  @@index([email, createdAt])
+}
+
+model Role {
+  id          String     @id @default(uuid())
+  name        String     @unique  // admin, operador, viewer, etc.
+  permissions Permission[]
+  users       User[]
+}
+
+model Permission {
+  id        String   @id @default(uuid())
+  action    String   // "read", "write", "execute"
+  module    String   // "fabrication", "inventory", etc.
+  roleId    String
+  role      Role     @relation(fields: [roleId], references: [id])
+
+  @@unique([action, module, roleId]) // evita permisos duplicados
 }
