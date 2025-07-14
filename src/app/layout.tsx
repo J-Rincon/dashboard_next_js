@@ -5,10 +5,10 @@ import "../ui/globals.css"
 
 export const metadata: Metadata = {
   title: {
-    template: '%s | CPSOFT Dashboard',
-    default: 'CPSOFT Dashboard',
+    template: '%s | Next Dashboard',
+    default: 'Next Dashboard',
   },
-  description: 'CPSOFT Dashboard - Panel administrativo para la gestión de materiales de Conceptos Plasticos.',
+  description: 'Next Dashboard - Panel administrativo para la gestión.',
 };
 
 export default function RootLayout({

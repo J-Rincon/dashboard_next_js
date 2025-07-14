@@ -9,6 +9,14 @@ export type User = {
   password: string;
 };
 
+export type FormattedUsersTable = {
+  id: string;
+  name: string;
+  email: string;
+  isActive: boolean;
+};
+
+
 export type Customer = {
   id: string;
   name: string;

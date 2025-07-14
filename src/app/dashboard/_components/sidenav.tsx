@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { Power } from 'lucide-react';
-import ConceptosLogo from './conceptos-logo';
+import LogoApp from './logo-app';
 import NavLinks from './nav-links';
 // import { signOut } from '@/auth';
 
@@ -12,7 +12,7 @@ export default function SideNav() {
         href="/"
       >
         <div className="w-32 text-white md:w-40">
-          <ConceptosLogo />
+          <LogoApp />
         </div>
       </Link>
       <div className="flex grow flex-row justify-between space-x-2 md:flex-col md:space-x-0 md:space-y-2">
