@@ -1,8 +1,11 @@
 // This script is used to seed the database with initial data. It creates an admin user and some blocks in the database.
 // It uses the Prisma Client to interact with the database. The script is executed using the command `npx prisma db seed`.
 
-import { prisma } from "@/lib/prisma";
+
+import { PrismaClient } from "@/generated/prisma";
 import bcrypt from "bcrypt";
+
+const prisma = new PrismaClient();
 
 async function main() {
   // Crear roles con permisos
@@ -55,7 +58,7 @@ async function main() {
       name: 'Admin Principal',
       email: 'admin@example.com',
       username: 'admin',
-      password: passwordHash,
+      passwordHash: passwordHash,
       isActive: true,
       roleId: adminRole.id,
     },

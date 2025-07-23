@@ -1,8 +1,8 @@
 import { cookies } from 'next/headers';
-import { prisma } from '@/lib/prisma';
+import prisma from '@/lib/prisma';
 import { nanoid } from 'nanoid';
 
-const SESSION_COOKIE_NAME = 'session';
+const SESSION_COOKIE_NAME = process.env.SESSION_COOKIE_NAME || 'dashboardSessionId';
 const SESSION_DURATION_MS = 1000 * 60 * 60 * 24 * 7; // 7 días
 
 export async function createSession(userId: string) {

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { montserrat } from "../ui/fonts";
 
 import "../ui/globals.css"
+import { Toaster } from "@/components/ui/sonner";
 
 export const metadata: Metadata = {
   title: {
@@ -25,6 +26,7 @@ export default function RootLayout({
         <footer>
           Powered by <a href="https://github.com/J-Rincon" target="_blank" rel="noopener noreferrer"><span className="text-blue-500">J-Rincon</span></a>
         </footer>
+        <Toaster/>
       </body>
     </html>
   );
