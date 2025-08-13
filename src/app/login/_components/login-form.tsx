@@ -2,7 +2,7 @@
 
 import { AtSign, KeyRound, ArrowRight, CircleAlert } from 'lucide-react';
 import { lusitana } from '@/ui/fonts';
-import { Button } from './button';
+import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';

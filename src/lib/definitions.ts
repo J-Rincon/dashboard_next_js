@@ -13,6 +13,9 @@ export type FormattedUsersTable = {
   id: string;
   name: string;
   email: string;
+  role: {
+    name: string;
+  };
   isActive: boolean;
 };
 

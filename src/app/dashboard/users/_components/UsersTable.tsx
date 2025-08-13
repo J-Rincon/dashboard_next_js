@@ -4,17 +4,26 @@ import {
   FormattedUsersTable,
 } from '@/lib/definitions';
 import UserStatus from './UserStatus';
+import { Button } from '@/components/ui/button';
+import { User, UserPlus } from 'lucide-react';
+import UsersAddDialog from './UsersAddDialog';
 
 export default async function UsersTable({
   users,
 }: {
   users: FormattedUsersTable[];
 }) {
+
+  console.log('users', users)
+  
   return (
     <div className="w-full">
-      <h1 className={`${lusitana.className} mb-8 text-xl md:text-2xl`}>
-        Customers
-      </h1>
+      <div className="flex items-center justify-between">
+        <h1 className={`${lusitana.className} mb-8 text-xl md:text-2xl`}>
+          Users
+        </h1>
+        <UsersAddDialog />
+      </div>
       {/* <Search placeholder="Search customers..." /> */}
       <div className="mt-6 flow-root">
         <div className="overflow-x-auto">
@@ -34,6 +43,9 @@ export default async function UsersTable({
                           </div>
                         </div>
                         <p className="text-sm text-gray-500">
+                          {user.role.name}
+                        </p>
+                        <p className="text-sm text-gray-500">
                           {user.email}
                         </p>
                       </div>
@@ -49,6 +61,9 @@ export default async function UsersTable({
                       Nombre
                     </th>
                     <th scope="col" className="px-3 py-5 font-medium">
+                      Rol
+                    </th>
+                    <th scope="col" className="px-3 py-5 font-medium">
                       Email
                     </th>
                     <th scope="col" className="px-3 py-5 font-medium">
@@ -62,6 +77,9 @@ export default async function UsersTable({
                     <tr key={user.id} className="group">
                       <td className="whitespace-nowrap bg-white py-5 pl-4 pr-3 text-sm text-black group-first-of-type:rounded-md group-last-of-type:rounded-md sm:pl-6">
                         <p>{user.name}</p>
+                      </td>
+                      <td className="whitespace-nowrap bg-white px-4 py-5 text-sm">
+                        {user.role.name}
                       </td>
                       <td className="whitespace-nowrap bg-white px-4 py-5 text-sm">
                         {user.email}

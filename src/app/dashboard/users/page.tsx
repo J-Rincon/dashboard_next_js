@@ -2,8 +2,8 @@
 import { lusitana } from '@/ui/fonts';
 
 import { Metadata } from 'next';
-// import { getAllUsers } from '@/lib/actions/userActions';
-// import UsersTable from './_components/UsersTable';
+import { getAllUsers } from '@/lib/actions/userActions';
+import UsersTable from './_components/UsersTable';
 
 export const metadata: Metadata = {
   title: 'Users',
@@ -11,13 +11,12 @@ export const metadata: Metadata = {
 };
  
 export default async function Page() {
-  // const users = await getAllUsers();
+  const users = await getAllUsers();
 
   return (
     <main>
       <h1 className={`${lusitana.className} mb-4 text-xl md:text-2xl`}>
-        Users
-        {/* <UsersTable users={users} /> */}
+        <UsersTable users={users} />
       </h1>
     </main>
   );
