@@ -15,7 +15,7 @@ export async function POST(req: Request) {
     data: {
       email,
       name,
-      username,
+      username: username || "<default_username>",
       roleId
     }
   });
@@ -30,12 +30,19 @@ export async function POST(req: Request) {
     }
   });
 
-  await resend.emails.send({
-    from: 'noreply@tuapp.com',
+  const { data, error } = await resend.emails.send({
+    from: 'noreply@conceptosplasticos.com',
     to: email,
     subject: 'Verify your account',
     html: `<a href="${process.env.NEXT_PUBLIC_BASE_URL}/verify?token=${token}">Verify Account</a>`
   });
+
+  if (error) {
+    console.error('Error al enviar correo de verificación:', error);
+    return NextResponse.json({ error: 'Error al enviar correo de verificación' }, { status: 500 });
+  }
+
+  console.log('data email', data);
 
   return NextResponse.json({ success: true });
 }

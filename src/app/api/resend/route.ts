@@ -45,12 +45,17 @@ export async function POST(req: Request) {
     }
   });
 
-  await resend.emails.send({
+  const { data, error } = await resend.emails.send({
     from: 'noreply@tuapp.com',
     to: user.email,
     subject: 'Nuevo enlace de verificación',
     html: `<a href="${process.env.NEXT_PUBLIC_BASE_URL}/verify?token=${newToken}">Verificar cuenta</a>`
   });
+
+  if (error) {
+    console.error('Error al enviar correo de verificación:', error);
+    return NextResponse.json({ error: 'Error al enviar correo de verificación' }, { status: 500 });
+  }
 
   return NextResponse.json({ success: true });
 }
